@@ -1,0 +1,23 @@
+int maximumScore(int* nums, int numsSize, int k) {
+    int n = numsSize;
+    int left =k, right =k;
+    int ans = nums[k];
+    int currMin = nums[k];
+
+    while(left>0 || right<n-1)
+    {
+        if ((left > 0 ? nums[left - 1]: 0) < (right < n - 1 ? nums[right + 1] : 0)) 
+        {
+            right++;
+            if(currMin > nums[right]) currMin = nums[right];
+        }
+        else
+        {
+            left--;
+            if(currMin > nums[left]) currMin = nums[left];
+        }
+
+        if(ans<(currMin * (right-left+1))) ans = currMin * (right-left+1);
+    }
+    return ans;
+}
